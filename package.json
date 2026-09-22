@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+   "dev": "node --experimental-strip-types src/gateway.ts",
+   "test-system": "node --experimental-strip-types src/test-all.ts",
+   "test-all-live": "concurrently \"npm run dev\" \"timeout /t 2 && npm run test-system\""
+}
+,
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -15,5 +18,8 @@
     "@types/node": "^26.6.2",
     "ts-node": "^10.9.2",
     "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "concurrently": "^10.0.5"
   }
 }

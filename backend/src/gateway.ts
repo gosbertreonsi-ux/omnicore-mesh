@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors'; // 1. Bring in the CORS package
 import type { Request, Response } from 'express';
 import type { NetworkPacket } from '../../shared/types.ts';
 import { verifyHmacSignature } from './security.ts';
@@ -6,6 +7,7 @@ import { orchestrateNaturalLanguageIntent } from './aiOrchestrator.ts';
 
 // 1. Initialize System Application Infrastructure
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 // Presentation In-Memory Ledger Storage Index
