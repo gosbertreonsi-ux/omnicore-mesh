@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { UserRole, TransactionPayload } from '../../shared/types';
+import { UserRole, TransactionPayload } from '../../shared/types.js';
 
 export const OverwatchDashboard: React.FC = () => {
   const [activeRole, setActiveRole] = useState<UserRole>('SYSTEM_ADMIN');

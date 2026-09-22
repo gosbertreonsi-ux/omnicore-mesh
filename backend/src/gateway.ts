@@ -1,26 +1,24 @@
-import express, { Request, Response, NextFunction } from 'express';
-import { NetworkPacket, UserRole } from '../../shared/types';
+import express from 'express';
+import type { Request, Response } from 'express';
+import type { NetworkPacket } from '../../shared/types.ts';
 
 const app = express();
 app.use(express.json());
 
-// Mock DB Storage array for presentation simulation
 const transactionDatabase: any[] = [];
 
-// API Route Handler simulating SkyPay Engine logic
 app.post('/api/v1/gateway/route', (req: Request, res: Response): void => {
   const packet: NetworkPacket = req.body;
 
-  if (!packet.route || !packet.payload) {
+  if (!packet || !packet.route || !packet.payload) {
     res.status(400).json({ success: false, error: 'Malformed payload network package string.' });
     return;
   }
 
-  // Simulate routing tasks and state mutations
   const { transactionId, amount, currency, status } = packet.payload;
   
   const record = {
-    id: `tx_${Math.random().toString(36).substr(2, 9)}`,
+    id: `tx_${Math.random().toString(36).substring(2, 11)}`,
     transactionId,
     amount,
     currency,
@@ -40,5 +38,5 @@ app.post('/api/v1/gateway/route', (req: Request, res: Response): void => {
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
-  console.log(`🚀 OmniCore Gateway active on port ${PORT}`);
+  console.log(`🚀 OmniCore Gateway active on port 5001`);
 });
