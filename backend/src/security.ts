@@ -1,11 +1,7 @@
 import crypto from 'crypto';
 
-// Presentation key used to compute and verify digital package signatures
 const HMAC_SECRET_KEY = 'skyconnect_secure_presentation_token_2026';
 
-/**
- * Computes a SHA-256 HMAC signature from an object payload
- */
 export function calculateHmacSignature(payload: object): string {
   const serializedPayload = JSON.stringify(payload);
   return crypto
@@ -21,6 +17,12 @@ export function verifyHmacSignature(payload: object, incomingSignature: string |
   if (!incomingSignature) return false;
 
   const calculatedSignature = calculateHmacSignature(payload);
+
+  // Structural Guardrail: If signature lengths do not match, reject instantly
+  // This prevents RangeErrors inside crypto.timingSafeEqual
+  if (calculatedSignature.length !== incomingSignature.length) {
+    return false;
+  }
 
   // Use constant-time comparison to completely neutralize timing attacks
   return crypto.timingSafeEqual(

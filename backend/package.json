@@ -4,14 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node --experimental-strip-types src/gateway.ts"
+     "dev": "node --experimental-strip-types src/gateway.ts",
+     "test-system": "node --experimental-strip-types src/test-all.ts",
+     "test": "vitest run"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "@types/express": "^5.0.6",
+    "@types/express": "^5.0.0",
     "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "vitest": "^3.0.0" 
   }
 }
